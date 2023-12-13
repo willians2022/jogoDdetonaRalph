@@ -1,0 +1,15 @@
+.container{
+    display: flex;
+}
+
+.menu {
+    background-color:#000000;
+    color:#ffffff;
+    display:flex;
+    justify-content: space-evenly;
+    align-items: center;
+    
+    height: 90px;
+    width: 100%;
+
+}

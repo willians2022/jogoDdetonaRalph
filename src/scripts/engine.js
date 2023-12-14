@@ -4,12 +4,14 @@ const state = {
         enemy: document.querySelector(".enemy"),
         timeLeft: document.querySelector("#time-left"),
         score: document.querySelector("#score"),
+        lives: document.querySelector("#lives"),
     },
     values: {
         gameVelocity: 1000,
         hitPosition: 0,
         result: 0,
         currentTime: 60,
+        lives: 3,
     },
     actions: {
         timerId: setInterval(randomSquare, 1000),
@@ -62,9 +64,20 @@ function handleHit(square) {
     if (square.id === state.values.hitPosition) {
         state.values.result++;
         state.view.score.textContent = state.values.result;
-        state.values.hitPosition = null;
         playSound("hit");
+    } else {
+        state.values.lives--;
+
+        if (state.values.lives <= -1) {
+            clearInterval(state.actions.countDownTimerId);
+            clearInterval(state.actions.timerId);
+            alert("Game Over! O seu resultado foi: " + state.values.result);
+        } else {
+            state.view.lives.textContent = state.values.lives;
+        }
     }
+
+    randomSquare();
 }
 
 function initialize() {
